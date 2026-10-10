@@ -88,6 +88,8 @@ p{margin:0}
 .div-card.has-anim>*:not(.div-anim){display:none}
 .div-anim video,.div-anim img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:100%}
 .div-anim video{opacity:0;transition:opacity .12s linear}
+.div-anim img.fb{opacity:0;transition:opacity .2s linear}
+.div-anim img.fb.on{opacity:1}
 .div-anim video.on{opacity:1}
 .div-anim .cap{position:absolute;left:12px;bottom:12px;z-index:3}
 .div-card p{color:#D9CCE4;font-size:15px}
@@ -249,7 +251,7 @@ footer small{font:12px/1.5 var(--f-mono);color:var(--smoke);width:100%}
     <aside class="div-card" aria-label="Meet Div">
       <div class="div-anim" id="div-anim" aria-label="Animated Div: she snaps her fingers and summons a gift box, a phone and a new dress">
         <img id="div-poster" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38uZWJgf13vAnvA3Cfk7DsjnPUG/hf_20261010_035049_2e003efc-f6f0-4e22-ad5f-af32573c28a1.png">
-        <video id="va" muted playsinline preload="auto"></video><video id="vb" muted playsinline preload="auto"></video>
+        <video id="va" muted autoplay playsinline preload="auto"></video><video id="vb" muted playsinline preload="auto"></video>
         <span class="sticker cap">Meet Div</span>
       </div>
       <canvas data-splat="29" aria-hidden="true"></canvas>
@@ -457,28 +459,39 @@ footer small{font:12px/1.5 var(--f-mono);color:var(--smoke);width:100%}
   paint();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(paint,150)});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(paint);
 
-  // Div animation: 27 clips (one per keyframe pair) chained into one loop with two buffered videos.
-  // Off pages.dev (e.g. inside a sandboxed preview) the media is blocked and the static card stays.
+  // Div animation. Plays the 27 interpolated clips back to back (two buffered <video>s).
+  // If video can't play here (blocked host, unsupported codec, autoplay refused), it falls back
+  // to animating the 27 keyframes as a crossfading flipbook. In sandboxed previews where the
+  // media host is blocked entirely, the static Meet Div card stays.
   (function(){
     var B='https://d8j0ntlcm91z4.cloudfront.net/user_38uZWJgf13vAnvA3Cfk7DsjnPUG/hf_20261010_';
     var clips=['035609_041ee76e-2fb4-4077-8501-c54f3623a960','035609_383851d6-a9ed-49a0-9c72-4051d262539c','035609_5e5adcab-13e0-4928-b401-265edb51d735','035609_65ca7a22-c39f-441f-b599-915fcb336e20','035609_f931f604-6250-483a-a5ad-d58c9c24d84e','035609_ef6d435f-641f-4969-ad46-baf95e11ede3','035609_19a21d54-9f80-47ab-9619-785d0fcab208','035609_2f28d807-8df0-4e1c-be65-e504def539df','035609_ea5bee2c-3173-43a2-bc1d-b23f6f9a069f','035652_b359390d-0ab9-4e2b-9ec2-596c43783dd9','035609_b6ae282d-99d6-41fa-b9de-eca7d4ae46ca','035609_62a9d120-e533-4c5b-98b3-cb880ffc1311','035653_9479f81e-7e8c-44d8-956a-b36abbc9de0a','035652_455aad69-c2f4-4d77-8999-da6e513d55de','035653_a8918562-a313-4b63-851c-a8e651e5b157','035653_153ad23c-33c8-4b9c-aca8-afc160d8dc5a','035652_1391ee0b-6204-4823-a1c4-eed5b2a15a9e','035652_7665c456-3404-4cab-a858-a58bbec42d11','035652_f3322315-b2b7-410d-8399-061cea8c17d9','035652_09a8e1a5-ab87-4c18-9449-7fe3458a25e1','035653_7b46c23b-6fd5-4105-a143-a62164ccd0c1','035652_c57c9220-b334-4f0b-87aa-62fa2c86dd9e','035652_7263ead7-8279-4c82-8de5-bbffbba826a1','035710_74817e38-4195-4353-8ad7-7771624e3a8d','035710_cdc937ef-e04a-4830-b77e-a0c4b42a522f','035710_c6469f3b-4d17-464d-b964-e251cb8c685e','035710_409bc9ee-73fd-42f7-b661-ff815af0a802'].map(function(c){return B+c+'.mp4'});
-    var card=document.querySelector('.div-card'),poster=document.getElementById('div-poster');
-    var v=[document.getElementById('va'),document.getElementById('vb')],cur=0,idx=0;
+    var frames=['035049_2e003efc-f6f0-4e22-ad5f-af32573c28a1','035050_830652b0-d188-458c-844b-b8e8c65717cd','035048_ce4f8f61-e048-4910-98b4-814bed7a907a','035049_cfa6467f-9697-4049-87bf-683618e4922e','035051_a0bfc668-aedd-4716-ac57-a9d22d4cc080','035051_83889664-6534-455e-9868-72e76f813161','035051_5eda1553-d374-40cd-b8e0-8f488ce53aab','035050_9581ab95-87e5-41da-8676-05f232279bf3','035049_737383e6-103d-463e-aef8-b09b2c1f6f3c','035050_e17150ee-ab9d-427e-a9ef-4345a6df2750','035050_dbc55b7a-a89f-4d17-87c5-02eb54dc9a40','035052_edd091a0-5f1b-4afa-9b1d-78352836910d','035158_764a9c14-aee9-4927-9c52-bd89d31463ba','035157_e4cdedd2-cd82-429f-b11a-91fb5c7cce96','035159_ddba84d7-51f5-4f9c-af5a-270b4bc3b692','035159_b8f2af08-a97c-4fef-b472-6f89012136c2','035159_8591cdea-e50c-4fa0-bd23-d6dbf8d78ba2','035159_aec45fa2-a625-46d5-ba0b-357bac684e63','035158_c2f01bfb-043c-482d-baf3-cdbdf058cdab','035200_861af226-6848-4053-b475-bfff46f37e26','035158_83e519e0-3f3e-4195-ada3-7b0405d4b61c','035200_2133b7e2-6838-4764-8636-123edf9b23a4','035200_1500383d-9dea-4820-ad5f-d1239de14d2f','035158_e3e6a14c-ba1b-4401-ad14-69d4db7f3be5','035222_c89eec98-6898-4bc5-9690-9e95bbc4b60d','035222_412ba94f-6e60-416d-9808-49eb08569cd4','035223_1a5cad44-4825-4df2-9579-d06dee5e5220'].map(function(c){return B+c+'.png'});
+    var card=document.querySelector('.div-card'),box=document.getElementById('div-anim'),poster=document.getElementById('div-poster');
+    var v=[document.getElementById('va'),document.getElementById('vb')],idx=0,RATE=1.6,mode='',timer;
     var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    poster.addEventListener('load',function(){card.classList.add('has-anim');if(!still)start()});
-    var RATE=1.6;
-    function load(el,i){el.src=clips[i%clips.length];el.load();el.playbackRate=RATE;el.defaultPlaybackRate=RATE}
-    function start(){
-      load(v[0],0);load(v[1],1);
-      v[0].addEventListener('canplay',function first(){v[0].removeEventListener('canplay',first);v[0].classList.add('on');v[0].play().catch(function(){})});
-      v.forEach(function(el,k){
-        el.addEventListener('ended',function(){
-          var nx=v[1-k];nx.classList.add('on');nx.play().catch(function(){});el.classList.remove('on');
-          idx++;load(el,idx+1);
-        });
-        el.addEventListener('error',function(){v.forEach(function(x){x.classList.remove('on')})});
-      });
+    function show(){card.classList.add('has-anim')}
+    if(poster.complete&&poster.naturalWidth)show();else poster.addEventListener('load',show);
+    if(still)return;
+    function load(el,i){el.src=clips[i%clips.length];el.muted=true;el.playbackRate=RATE;el.defaultPlaybackRate=RATE;el.load()}
+    function flipbook(){
+      if(mode==='flip')return;mode='flip';clearTimeout(timer);
+      v.forEach(function(el){el.pause();el.removeAttribute('src');el.classList.remove('on')});
+      var imgs=frames.map(function(u,k){var im=new Image();im.alt='';im.decoding='async';im.src=u;im.className='fb';box.insertBefore(im,box.querySelector('.cap'));return im});
+      var i=0;imgs[0].classList.add('on');
+      setInterval(function(){var n=(i+1)%imgs.length;if(!imgs[n].complete)return;imgs[n].classList.add('on');imgs[i].classList.remove('on');i=n},420);
     }
+    load(v[0],0);load(v[1],1);
+    timer=setTimeout(function(){if(mode!=='video')flipbook()},8000);
+    v[0].addEventListener('playing',function(){if(mode!=='flip'){mode='video';clearTimeout(timer);show()}},{once:true});
+    v[0].addEventListener('canplay',function(){if(mode==='flip')return;v[0].classList.add('on');var pr=v[0].play();if(pr)pr.catch(flipbook)},{once:true});
+    v.forEach(function(el,k){
+      el.addEventListener('ended',function(){
+        if(mode==='flip')return;var nx=v[1-k];nx.classList.add('on');var pr=nx.play();if(pr)pr.catch(flipbook);
+        el.classList.remove('on');idx++;load(el,idx+1);
+      });
+      el.addEventListener('error',flipbook);
+    });
   })();
 
   // mobile menu
