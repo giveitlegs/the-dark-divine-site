@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Dark Divine</title>
+<meta name="description" content="Bella Bellini — The Dark Divine. UGC, short-form video and photography for beauty, lifestyle and travel brands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400;1,6..96,600&family=Manrope:wght@400;500;700&family=Rubik+Wet+Paint&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap">
+<style>
+/* Layout: one long neon-noir scroll, 1200px column, sticky glass nav; splatter canvases frame each section, text zones stay clean. Dark-only by design. */
+:root{
+  color-scheme: dark;
+  --void:#0B0710; --crypt:#160E1E; --crypt-2:#211530; --line:#33224A;
+  --neon:#B026FF; --glow:#C964FF; --deep:#5B0FA8; --sin:#FF3EA5; --lilac:#E6CCFF;
+  --bone:#F3ECF7; --smoke:#A99BB5; --ink:#1A0010;
+  --f-display:"Syne","Arial Black",system-ui,sans-serif;
+  --f-noir:"Bodoni Moda","Didot",Georgia,serif;
+  --f-body:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --f-drip:"Rubik Wet Paint","Syne",system-ui,sans-serif;
+  --gutter:clamp(16px,4vw,40px);
+}
+*{box-sizing:border-box}
+html{background:var(--void);overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--void);color:var(--bone);font:400 17px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;margin:0}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img,svg,canvas{max-width:100%}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--sin);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.02}
+p{margin:0}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:var(--gutter)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--sin);color:var(--ink);padding:8px 12px;z-index:200;font:700 13px var(--f-mono)}
+.skip:focus{left:8px}
+.eyebrow{font:700 12px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--sin)}
+.noir{font-family:var(--f-noir);font-style:italic;font-weight:400}
+.muted{color:var(--smoke)}
+.glow{text-shadow:0 0 10px rgba(176,38,255,.9),0 0 34px rgba(176,38,255,.55)}
+.splat{position:absolute;pointer-events:none;z-index:0}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:rgba(11,7,16,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--bone)}
+.brand svg{width:36px;height:36px;flex:none}
+.brand span{display:flex;flex-direction:column;line-height:.9}
+.brand i{font:italic 400 13px var(--f-noir);color:var(--lilac)}
+.brand b{font:800 20px var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.links{display:flex;gap:26px;align-items:center}
+.links a{font:700 12px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--smoke);text-decoration:none;padding:8px 0}
+.links a:hover,.links a:focus-visible{color:var(--bone)}
+.links .btn{color:#fff;padding:12px 16px}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--bone);font:700 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:10px 12px;border-radius:2px;cursor:pointer}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 13px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:16px 22px;border-radius:2px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s,background .2s,color .2s}
+.btn svg{width:16px;height:16px}
+.btn-p{background:var(--neon);color:#fff;box-shadow:0 0 0 1px var(--neon),0 0 22px rgba(176,38,255,.55)}
+.btn-p:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--sin),0 0 30px rgba(176,38,255,.7)}
+.btn-g{background:transparent;color:var(--bone);border-color:var(--bone)}
+.btn-g:hover{background:var(--bone);color:var(--void)}
+.btn-s{background:var(--sin);color:var(--ink)}
+.btn-s:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--neon)}
+
+/* hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(56px,9vw,110px) clamp(48px,7vw,90px)}
+.hero canvas.bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.drip{position:absolute;left:0;top:0;width:100%;height:120px;z-index:-1;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.8fr);gap:48px;align-items:end}
+.hero .wrap>*{min-width:0}
+.hero h1{font-size:clamp(56px,10.5vw,128px);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:.86}
+.hero h1 .the{display:block;font:italic 400 clamp(30px,5vw,64px)/1 var(--f-noir);text-transform:none;letter-spacing:0;color:var(--lilac);margin-bottom:.12em}
+.hero .tag{font:italic 400 clamp(22px,3vw,32px)/1.25 var(--f-noir);margin-top:22px}
+.hero .sub{margin-top:14px;max-width:46ch;color:#D9CCE4}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.sticker{display:inline-block;font:700 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;background:var(--sin);color:var(--ink);padding:8px 11px;transform:rotate(-3deg);box-shadow:3px 3px 0 var(--deep)}
+.div-card{position:relative;border:1px solid var(--neon);border-radius:4px;background:radial-gradient(90% 70% at 50% 100%,rgba(176,38,255,.35),transparent 70%),var(--crypt);padding:26px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;box-shadow:0 0 40px rgba(91,15,168,.6);overflow:hidden}
+.div-card canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.85}
+.div-card>*:not(canvas){position:relative;z-index:1}
+.div-card .mark{width:min(200px,60%);height:min(200px,40vw);align-self:center;filter:drop-shadow(0 0 20px rgba(176,38,255,.8))}
+.div-card h2{font-size:30px;text-transform:uppercase}
+.div-anim{position:absolute;inset:0;z-index:2;background:var(--void);display:none}
+.div-card.has-anim .div-anim{display:block}
+.div-card.has-anim{min-height:0;aspect-ratio:3/4;padding:0}
+.div-card.has-anim>*:not(.div-anim){display:none}
+.div-anim video,.div-anim img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:100%}
+.div-anim video{opacity:0;transition:opacity .12s linear}
+.div-anim video.on{opacity:1}
+.div-anim .cap{position:absolute;left:12px;bottom:12px;z-index:3}
+.div-card p{color:#D9CCE4;font-size:15px}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--neon);color:#fff;overflow:hidden;white-space:nowrap}
+.marquee div{display:inline-flex;gap:28px;padding:14px 0;font:800 20px/1 var(--f-display);text-transform:uppercase;letter-spacing:.04em;animation:slide 32s linear infinite}
+.marquee span:nth-child(even){font:400 22px/1 var(--f-drip);color:var(--ink)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section.s{position:relative;padding-block:clamp(64px,9vw,112px);overflow:hidden}
+section.s.alt{background:var(--crypt)}
+.s-head{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;position:relative;z-index:1}
+.s-head h2{font-size:clamp(36px,6vw,68px);font-weight:800;text-transform:uppercase}
+.s-head .fr{font:italic 400 20px var(--f-noir);color:var(--lilac)}
+.lede{font-size:clamp(17px,2vw,20px);max-width:62ch;color:#E2D6EC}
+.grid{display:grid;gap:18px;position:relative;z-index:1}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start;position:relative;z-index:1}
+.about .story{display:flex;flex-direction:column;gap:18px;min-width:0}
+.quote{font:italic 400 clamp(22px,2.6vw,30px)/1.3 var(--f-noir);border-left:3px solid var(--neon);padding:6px 0 6px 22px;color:var(--lilac)}
+.quote small{display:block;font:12px/1.4 var(--f-mono);font-style:normal;color:var(--smoke);margin-top:10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:var(--crypt);border:1px solid var(--line);border-radius:4px;padding:20px}
+.stat b{display:block;font:800 40px/1 var(--f-display);color:var(--glow)}
+.stat span{font:12px/1.4 var(--f-mono);color:var(--smoke);letter-spacing:.06em;text-transform:uppercase}
+.promise{grid-column:1/-1;background:var(--sin);color:var(--ink);border-radius:4px;padding:20px;font:400 26px/1.1 var(--f-drip)}
+
+/* niches */
+.niche{border-radius:4px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;border:1px solid var(--line);position:relative;overflow:hidden}
+.niche h3{font:800 clamp(32px,4vw,42px)/1 var(--f-display);text-transform:uppercase}
+.niche .noir{font-size:20px;color:var(--lilac)}
+.niche p{font-size:15px;color:#D9CCE4}
+.n1{background:linear-gradient(160deg,var(--deep),var(--crypt) 72%)}
+.n2{background:linear-gradient(160deg,var(--neon),var(--crypt) 72%)}
+.n3{background:linear-gradient(160deg,var(--sin),var(--crypt) 72%)}
+
+/* services */
+.svc{background:var(--void);border:1px solid var(--line);border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.svc:hover{border-color:var(--neon);transform:translateY(-3px)}
+.svc svg{width:30px;height:30px;color:var(--glow)}
+.svc .orig{font:11px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sin)}
+.svc h3{font-size:22px;font-weight:700}
+.svc p{font-size:15px;color:var(--smoke)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:st;position:relative;z-index:1}
+.step{border-top:2px solid var(--neon);padding:18px 18px 0 0;counter-increment:st;min-width:0}
+.step::before{content:"0" counter(st);display:block;font:400 34px/1 var(--f-drip);color:var(--neon);margin-bottom:10px}
+.step h3{font-size:20px;margin-bottom:6px}
+.step p{font-size:14.5px;color:var(--smoke)}
+
+/* portfolio */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;position:relative;z-index:1}
+.chip{font:700 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--smoke);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--neon);border-color:var(--neon);color:#fff}
+.work{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/5;max-width:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;text-decoration:none;color:var(--bone);background:var(--crypt)}
+.work canvas{position:absolute;inset:0;width:100%;height:100%}
+.work>*:not(canvas){position:relative}
+.work .fmt{font:11px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lilac)}
+.work strong{font:700 21px/1.15 var(--f-display);margin-top:6px}
+.work .go{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(11,7,16,.7);display:grid;place-items:center;color:var(--bone)}
+.work:hover{border-color:var(--neon)}
+.work[hidden]{display:none!important}
+.note{font:12px/1.5 var(--f-mono);color:var(--smoke);margin-top:16px;position:relative;z-index:1}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;position:relative;z-index:1}
+form{display:grid;gap:14px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font:700 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--smoke)}
+.field label .req{color:var(--sin)}
+input,select,textarea{width:100%;background:var(--void);border:1px solid var(--line);border-bottom:2px solid var(--neon);color:var(--bone);font:16px var(--f-body);padding:12px;border-radius:2px}
+textarea{min-height:120px;resize:vertical}
+.err{font:12px var(--f-mono);color:var(--sin);min-height:1em}
+.out{background:var(--crypt);border:1px solid var(--neon);border-radius:4px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.out pre{margin:0;white-space:pre-wrap;font:13px/1.55 var(--f-mono);color:var(--lilac);max-height:260px;overflow:auto}
+.socials{display:flex;flex-direction:column;gap:12px}
+.social{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--crypt);border:1px solid var(--line);border-radius:4px;padding:18px 20px;text-decoration:none;color:var(--bone);transition:border-color .2s}
+.social:hover{border-color:var(--neon)}
+.social b{font:700 18px var(--f-display)}
+.social span{font:13px var(--f-mono);color:var(--glow)}
+
+footer{border-top:1px solid var(--line);padding-block:40px;position:relative;overflow:hidden}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:18px}
+footer nav a{font:700 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);text-decoration:none}
+footer small{font:12px/1.5 var(--f-mono);color:var(--smoke);width:100%}
+
+@media (max-width:900px){
+  .hero .wrap,.about,.contact{grid-template-columns:1fr}
+  .div-card{min-height:320px}
+  .steps{grid-template-columns:1fr 1fr;row-gap:28px}
+}
+@media (max-width:760px){
+  .menu-btn{display:inline-flex}
+  .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:8px var(--gutter) 16px}
+  .links.open{display:flex}
+  .links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .links .btn{margin-top:12px;justify-content:center;border-bottom:none}
+  .row2{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="mark" viewBox="-34 -34 68 68"><ellipse cx="0" cy="-20" rx="13" ry="3.8" fill="none" stroke="#B026FF" stroke-width="3"/><path d="M-5 20C-10 8-18-3-29-9-24 3-21 14-15 25Z" fill="#B026FF"/><path d="M5 20C10 8 18-3 29-9 24 3 21 14 15 25Z" fill="#B026FF"/><path d="M0 8C-12-1-9-13 0-7 9-13 12-1 0 8Z" transform="translate(0 9) scale(.62)" fill="#FF3EA5"/></symbol>
+  <symbol id="i-ugc" viewBox="0 0 24 24"><g class="ico"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 9.2 14.8 12 10.5 14.8Z"/><path d="M10.5 5.2h3"/></g></symbol>
+  <symbol id="i-sponsored" viewBox="0 0 24 24"><g class="ico"><path d="M12 3.2 14.5 8.6 20.4 9.3 16 13.3 17.2 19.2 12 16.2 6.8 19.2 8 13.3 3.6 9.3 9.5 8.6Z"/></g></symbol>
+  <symbol id="i-short" viewBox="0 0 24 24"><g class="ico"><rect x="3" y="7" width="18" height="13.5" rx="2"/><path d="M3 11h18M7 7l2 4M12 7l2 4M17 7l2 4"/></g></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><g class="ico"><path d="M3.5 8.5h3.2l1.8-3h7l1.8 3h3.2v11h-17Z"/><circle cx="12" cy="13.6" r="3.6"/></g></symbol>
+  <symbol id="i-lifestyle" viewBox="0 0 24 24"><g class="ico"><path d="M4.5 10h11v4.5a4.5 4.5 0 0 1-4.5 4.5h-2a4.5 4.5 0 0 1-4.5-4.5Z"/><path d="M15.5 11h1.5a2.5 2.5 0 0 1 0 5h-1.5M3.5 21h14M8.5 3.5q1.6 1.8 0 3.6M12 3.5q1.6 1.8 0 3.6"/></g></symbol>
+  <symbol id="i-travel" viewBox="0 0 24 24"><g class="ico"><path d="M3 11.2 21 4 15 20.5 11 13Z"/><path d="M11 13 21 4"/></g></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><g class="ico"><path d="M4 18.5 4.8 8.5 9.2 12.5 12 6.5 14.8 12.5 19.2 8.5 20 18.5Z"/><path d="M4 21h16M8 6.5C7.5 4.5 6.5 3.5 5 3M16 6.5c.5-2 1.5-3 3-3.5"/></g></symbol>
+  <symbol id="i-review" viewBox="0 0 24 24"><g class="ico"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/><path d="M10.5 13.3c-2.6-1.9-2-3.9-.6-3.9.4 0 .6.2.6.5 0-.3.2-.5.6-.5 1.4 0 2 2-.6 3.9Z"/></g></symbol>
+  <symbol id="i-social" viewBox="0 0 24 24"><g class="ico"><path d="M4 4.5h16v11.5h-9l-4.5 4v-4H4Z"/><path d="M12 13c-3.4-2.4-2.6-5-.8-5 .5 0 .8.3.8.7 0-.4.3-.7.8-.7 1.8 0 2.6 2.6-.8 5Z"/></g></symbol>
+  <symbol id="i-collab" viewBox="0 0 24 24"><g class="ico"><path d="M9 18.5C2.5 14 3.5 8 7.2 8 8.3 8 9 8.7 9 9.5 9 8.7 9.7 8 10.8 8c1.4 0 2.4.9 2.7 2.3"/><path d="M15 19.5c-5.5-3.8-4.6-8.8-1.5-8.8 1 0 1.5.6 1.5 1.3 0-.7.5-1.3 1.5-1.3 3.1 0 4 5-1.5 8.8Z"/></g></symbol>
+  <symbol id="i-campaign" viewBox="0 0 24 24"><g class="ico"><path d="M3.5 10v4h3l9 5V5l-9 5Z"/><path d="M6.5 14v5h3v-3.4M18.5 9q2 3 0 6"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g class="ico"><path d="M6 18 18 6M8.5 6H18v9.5"/></g></symbol>
+</defs></svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="The Dark Divine, home"><svg aria-hidden="true"><use href="#mark"/></svg><span><i>the dark</i><b>Divine</b></span></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="links">Menu</button>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#services">Services</a><a href="#contact">Contact</a>
+      <a class="btn btn-p" href="#contact">Let's work together</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+  <canvas class="bg" data-splat="13" data-dense="1" aria-hidden="true"></canvas>
+  <canvas class="drip" data-drip="3" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="sticker">UGC · Beauty · Lifestyle · Travel</span>
+      <h1 style="margin-top:24px"><span class="the">the</span><span class="glow">Dark</span><br>Divine</h1>
+      <p class="tag">Sweet like sin. Not for sale.</p>
+      <p class="sub">I'm Bella Bellini. I make UGC, short-form video and photography for beauty, lifestyle and travel brands: content that feels like a friend's recommendation and works like an ad.</p>
+      <div class="cta-row">
+        <a class="btn btn-p" href="#contact">Let's work together <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-g" href="#portfolio">See the work</a>
+      </div>
+    </div>
+    <aside class="div-card" aria-label="Meet Div">
+      <div class="div-anim" id="div-anim" aria-label="Animated Div: she snaps her fingers and summons a gift box, a phone and a new dress">
+        <img id="div-poster" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38uZWJgf13vAnvA3Cfk7DsjnPUG/hf_20261010_035049_2e003efc-f6f0-4e22-ad5f-af32573c28a1.png">
+        <video id="va" muted playsinline preload="auto"></video><video id="vb" muted playsinline preload="auto"></video>
+        <span class="sticker cap">Meet Div</span>
+      </div>
+      <canvas data-splat="29" aria-hidden="true"></canvas>
+      <span class="sticker" style="align-self:flex-start">Meet Div</span>
+      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
+      <div>
+        <h2>Bella's demon twin</h2>
+        <p>Horns, a heart-tipped tail and zero patience for beige content. She shows up wherever Bella can't.</p>
+        <p style="margin-top:12px"><a href="https://d8j0ntlcm91z4.cloudfront.net/user_38uZWJgf13vAnvA3Cfk7DsjnPUG/hf_20261010_032532_e071e022-9158-47de-9122-1cbd74e53080.png" target="_blank" rel="noopener">See Div ↗</a></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>UGC</span><span>not 4 sale</span><span>Short-form video</span><span>divine</span><span>Product photo</span><span>wicked</span><span>Travel campaigns</span><span>honest</span><span>Brand ambassador</span><span>not 4 sale</span>
+  <span>UGC</span><span>not 4 sale</span><span>Short-form video</span><span>divine</span><span>Product photo</span><span>wicked</span><span>Travel campaigns</span><span>honest</span><span>Brand ambassador</span><span>not 4 sale</span>
+</div></div>
+
+<section class="s" id="about">
+  <canvas class="splat" data-splat="7" style="right:-60px;top:-40px;width:360px;height:360px" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">About</span><h2>Possessed by aesthetics</h2><span class="fr">raised by the internet</span></div>
+    <div class="about">
+      <div class="story">
+        <p class="lede">I'm a millennial lifestyle creator and marketing muse with more than 12 years of content creation and brand partnerships behind me. I split my time between New York, Georgia and Florida, and I make content for brands with taste and a little nerve.</p>
+        <p class="muted">The Dark Divine is my alter ego: cute enough to stop the scroll, sharp enough to say no to a brief that reads like a quarterly report. I only post about products I'd actually use. My time is for hire; my opinion isn't.</p>
+        <p class="quote">“My content is rooted in curiosity, creativity, and genuine connection—because those are the things people remember.”<small>Bella Bellini</small></p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>12+</b><span>Years creating</span></div>
+        <div class="stat"><b>11</b><span>Ways to work together</span></div>
+        <div class="stat"><b>3</b><span>Niches: beauty, lifestyle, travel</span></div>
+        <div class="stat"><b>NY·GA·FL</b><span>Home bases</span></div>
+        <div class="promise">not 4 sale: honest opinions only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s alt" id="influence">
+  <canvas class="splat" data-splat="41" style="left:-80px;bottom:-60px;width:340px;height:340px" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">Influence</span><h2>Where she haunts</h2></div>
+    <div class="grid g3">
+      <article class="niche n1"><div><h3>Beauty</h3><span class="noir">glam with a bite</span></div><p>Makeup, skincare, hair and fragrance. Swatches, routines and honest first impressions.</p></article>
+      <article class="niche n2"><div><h3>Lifestyle</h3><span class="noir">la vie en néon</span></div><p>Home, self-care, wellness, pets, collectibles and everyday rituals.</p></article>
+      <article class="niche n3"><div><h3>Travel</h3><span class="noir">wander, wickedly</span></div><p>Getaways between New York, Georgia and Florida, plus hotels and experiences.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="services">
+  <canvas class="splat" data-splat="55" style="right:-80px;top:40px;width:320px;height:320px" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">Services</span><h2>Divine content, devilish reach</h2><span class="fr">eleven ways to work together</span></div>
+    <div class="grid g4">
+      <article class="svc"><svg aria-hidden="true"><use href="#i-ugc"/></svg><span class="orig">UGC creation</span><h3>UGC Possession</h3><p>Creator-style videos and photos your brand owns and runs as ads or organic posts.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-sponsored"/></svg><span class="orig">Sponsored content</span><h3>Sponsored Sins</h3><p>Paid posts on my channels, in my voice, clearly disclosed.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-short"/></svg><span class="orig">Short-form video</span><h3>Short-Form Hexes</h3><p>TikTok and Reels with a hook in the first second, trending audio and captions.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-camera"/></svg><span class="orig">Product photography</span><h3>The Product Altar</h3><p>Styled product shots for e-commerce, ads and launches.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-lifestyle"/></svg><span class="orig">Lifestyle photography</span><h3>Lifestyle Rituals</h3><p>Your product in real life: in hand, at home, out at night.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-travel"/></svg><span class="orig">Travel campaigns</span><h3>Wanderlust Pilgrimage</h3><p>On-location content for hotels, destinations and travel brands.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-crown"/></svg><span class="orig">Brand ambassadorships</span><h3>The Covenant</h3><p>Long-term partnerships with recurring content and a real relationship with the product.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-review"/></svg><span class="orig">Product reviews</span><h3>Honest Confessions</h3><p>Real-use reviews and first impressions. Opinions are mine and not for sale.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-social"/></svg><span class="orig">Social media content</span><h3>Feed Haunting</h3><p>Ready-to-post content packs for your Instagram, TikTok and Pinterest.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-collab"/></svg><span class="orig">Influencer collaborations</span><h3>Coven Collabs</h3><p>Co-created content, giveaways, takeovers and launch-event coverage.</p></article>
+      <article class="svc"><svg aria-hidden="true"><use href="#i-campaign"/></svg><span class="orig">Creative campaigns</span><h3>Dark Arts Campaigns</h3><p>Concept to delivery: idea, script, shoot, edit and cutdowns for every platform.</p></article>
+      <article class="svc" style="background:var(--neon);border-color:var(--neon);justify-content:space-between"><span class="orig" style="color:#fff">Not sure which?</span><h3 style="font-size:26px">Tell me what you're launching</h3><a class="btn btn-s" href="#contact" style="align-self:flex-start">Start an inquiry</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="s alt" id="process">
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">Process</span><h2>From brief to post</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Brief</h3><p>You share the product, goals, deadlines and must-says.</p></div>
+      <div class="step"><h3>Concept</h3><p>I pitch hooks, angles and a shot list that sounds like me.</p></div>
+      <div class="step"><h3>Shoot</h3><p>Filmed and photographed in real settings, never a sterile set.</p></div>
+      <div class="step"><h3>Edit</h3><p>Cut for each platform with captions, audio and cover frames.</p></div>
+      <div class="step"><h3>Deliver</h3><p>Final files, usage terms and a round of revisions included.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="portfolio">
+  <canvas class="splat" data-splat="61" style="left:-60px;top:-30px;width:300px;height:300px" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">Portfolio</span><h2>Recent hauntings</h2><span class="fr">straight from the feed</span></div>
+    <div class="filters" role="group" aria-label="Filter work">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-f="beauty" aria-pressed="false">Beauty</button>
+      <button class="chip" type="button" data-f="lifestyle" aria-pressed="false">Lifestyle</button>
+      <button class="chip" type="button" data-f="travel" aria-pressed="false">Travel</button>
+    </div>
+    <div class="grid g4" id="works">
+      <a class="work" data-cat="lifestyle" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><canvas data-art="1" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">Reel · Self-care</span><strong>Late-night self-care just got an upgrade</strong></a>
+      <a class="work" data-cat="beauty" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><canvas data-art="2" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">Reel · Beauty</span><strong>Rare Beauty: “Embrace.”</strong></a>
+      <a class="work" data-cat="beauty" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><canvas data-art="3" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">UGC · Beauty</span><strong>Product reveal, straight to camera</strong></a>
+      <a class="work" data-cat="lifestyle" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><canvas data-art="4" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">Reel · Collectibles</span><strong>Michaels’ new Romeo &amp; Juliet collection</strong></a>
+      <a class="work" data-cat="lifestyle" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><canvas data-art="5" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">Reel · Wellness</span><strong>Puppies and yoga</strong></a>
+      <a class="work" data-cat="lifestyle" href="https://www.instagram.com/bellabellinicreations/" target="_blank" rel="noopener"><canvas data-art="6" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">Photo · Creations</span><strong>It’s the little things</strong></a>
+      <a class="work" data-cat="travel" href="#contact" style="border-color:var(--sin)"><canvas data-art="7" aria-hidden="true"></canvas><span class="fmt">Travel · Booking now</span><strong>Your destination could be next</strong></a>
+      <a class="work" data-cat="all" href="https://www.tiktok.com/@bella_bellinix" target="_blank" rel="noopener"><canvas data-art="8" aria-hidden="true"></canvas><span class="go"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="fmt">TikTok</span><strong>More on @bella_bellinix</strong></a>
+    </div>
+    <p class="note">From @_bellabellini and @bellabellinicreations. Cards open her profiles; thumbnails drop in once the media files are supplied.</p>
+  </div>
+</section>
+
+<section class="s alt" id="contact">
+  <canvas class="splat" data-splat="73" style="right:-70px;bottom:-50px;width:360px;height:360px" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="s-head"><span class="eyebrow">Contact</span><h2>Let's work together</h2><span class="fr">let's make something people remember</span></div>
+    <div class="contact">
+      <form id="inq" novalidate>
+        <div class="row2">
+          <div class="field"><label for="f-name">Your name <span class="req">*</span></label><input id="f-name" name="name" autocomplete="name" required aria-required="true" aria-describedby="e-name"><span class="err" id="e-name" role="alert"></span></div>
+          <div class="field"><label for="f-brand">Brand <span class="req">*</span></label><input id="f-brand" name="brand" autocomplete="organization" required aria-required="true" aria-describedby="e-brand"><span class="err" id="e-brand" role="alert"></span></div>
+        </div>
+        <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-required="true" aria-describedby="e-email"><span class="err" id="e-email" role="alert"></span></div>
+        <div class="row2">
+          <div class="field"><label for="f-service">What you need</label><select id="f-service" name="service"><option>UGC creation</option><option>Sponsored content</option><option>Short-form video</option><option>Product photography</option><option>Lifestyle photography</option><option>Travel campaign</option><option>Brand ambassadorship</option><option>Product review</option><option>Social media content</option><option>Influencer collaboration</option><option>Creative campaign</option><option>Not sure yet</option></select></div>
+          <div class="field"><label for="f-budget">Budget</label><select id="f-budget" name="budget"><option>Under $500</option><option>$500–$1,500</option><option>$1,500–$5,000</option><option>$5,000+</option><option>Let's talk</option></select></div>
+        </div>
+        <div class="field"><label for="f-when">Timeline</label><input id="f-when" name="when" placeholder="e.g. Launching March 15"></div>
+        <div class="field"><label for="f-msg">Tell me about it <span class="req">*</span></label><textarea id="f-msg" name="msg" required aria-required="true" aria-describedby="e-msg"></textarea><span class="err" id="e-msg" role="alert"></span></div>
+        <button class="btn btn-p" type="submit" style="justify-self:start">Write my inquiry <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <div class="out" id="out" hidden aria-live="polite">
+          <strong style="font:700 18px var(--f-display)">Your inquiry is ready to send</strong>
+          <p class="muted" style="font-size:14px">Copy it, then send it as a DM on Instagram or TikTok.</p>
+          <pre id="out-text"></pre>
+          <div class="cta-row" style="margin-top:0">
+            <button class="btn btn-s" type="button" id="copy">Copy inquiry</button>
+            <a class="btn btn-g" href="https://ig.me/m/_bellabellini" target="_blank" rel="noopener">DM on Instagram</a>
+          </div>
+          <span class="err" id="copy-msg" style="color:var(--glow)"></span>
+        </div>
+      </form>
+      <div class="socials">
+        <p class="lede">Tell me what you're launching and when. Brands, agencies and fellow creators all welcome.</p>
+        <a class="social" href="https://www.tiktok.com/@bella_bellinix" target="_blank" rel="noopener"><b>TikTok</b><span>@bella_bellinix ↗</span></a>
+        <a class="social" href="https://www.instagram.com/_bellabellini/" target="_blank" rel="noopener"><b>Instagram</b><span>@_bellabellini ↗</span></a>
+        <a class="social" href="https://www.instagram.com/bellabellinicreations/" target="_blank" rel="noopener"><b>Creations</b><span>@bellabellinicreations ↗</span></a>
+        <p class="note" style="margin-top:4px">Business email coming soon. For now, DMs are the fastest way in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <canvas class="drip" data-drip="17" data-pink="1" style="top:auto;bottom:0;height:60px;transform:scaleY(-1)" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <a class="brand" href="#home"><svg aria-hidden="true"><use href="#mark"/></svg><span><i>the dark</i><b>Divine</b></span></a>
+    <nav aria-label="Footer"><a href="#home">Home</a><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a></nav>
+    <small>© 2026 Bella Bellini Co. LLC · All rights reserved · Sweet like sin. Not for sale.</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var NEON='#B026FF',DEEP='#5B0FA8',SIN='#FF3EA5',GLOW='#C964FF';
+  function rng(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+  function prep(cv){var r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,r.width),h=Math.max(1,r.height);cv.width=w*d;cv.height=h*d;var c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return {c:c,w:w,h:h}}
+  function blob(c,R,cx,cy,base,col,glow){
+    c.fillStyle=col;c.shadowColor=col;c.shadowBlur=glow;c.beginPath();
+    for(var i=0;i<=24;i++){var a=i/24*Math.PI*2,rad=base*(.62+R()*.5);var x=cx+Math.cos(a)*rad,y=cy+Math.sin(a)*rad;i?c.lineTo(x,y):c.moveTo(x,y)}
+    c.closePath();c.fill();
+    for(var d=0;d<Math.min(60,base*.8);d++){var a2=R()*Math.PI*2,dist=base*(1.05+Math.pow(R(),1.8)*2.4),s=Math.pow(R(),2.2)*base*.1+.8;c.beginPath();c.arc(cx+Math.cos(a2)*dist,cy+Math.sin(a2)*dist,s,0,7);c.fill()}
+    c.lineCap='round';c.strokeStyle=col;
+    for(var k=0;k<10;k++){var a3=R()*Math.PI*2,w=1+R()*base*.06;c.lineWidth=w;c.beginPath();c.moveTo(cx+Math.cos(a3)*base*.7,cy+Math.sin(a3)*base*.7);c.lineTo(cx+Math.cos(a3)*base*(1.3+R()*1.3),cy+Math.sin(a3)*base*(1.3+R()*1.3));c.stroke()}
+    for(var q=0;q<4;q++){var dx=cx+(R()-.5)*base*1.2,len=base*(.5+R()*2),wd=2+R()*base*.08;c.fillRect(dx-wd/2,cy,wd,len);c.beginPath();c.arc(dx,cy+len,wd*.85,0,7);c.fill()}
+    c.shadowBlur=0;
+  }
+  function splat(cv){
+    var p=prep(cv),c=p.c,R=rng(+cv.dataset.splat||7),dense=cv.dataset.dense==='1';
+    var cols=[NEON,NEON,DEEP,SIN,GLOW],n=dense?6:3;
+    for(var k=0;k<n;k++){
+      var cx=dense?(p.w*(.55+R()*.45)):(p.w*(.25+R()*.5)),cy=p.h*(.15+R()*.5);
+      var base=Math.min(p.w,p.h)*(dense?(.05+R()*.09):(.12+R()*.12));
+      c.globalAlpha=dense?(.3+R()*.3):(.6+R()*.35);
+      blob(c,R,cx,cy,base,cols[Math.floor(R()*cols.length)],dense?28:14);
+    }
+    if(dense){c.globalAlpha=.8;for(var i=0;i<500;i++){var e=R(),x,y,t=Math.pow(R(),2.6);if(e<.5){x=R()*p.w;y=p.h-t*120}else{x=p.w-t*180;y=R()*p.h}c.fillStyle=cols[i%cols.length];c.beginPath();c.arc(x,y,Math.pow(R(),4)*5+.6,0,7);c.fill()}}
+    c.globalAlpha=1;
+  }
+  function drip(cv){
+    var p=prep(cv),c=p.c,R=rng(+cv.dataset.drip||3);c.fillStyle=cv.dataset.pink?SIN:NEON;
+    c.fillRect(0,0,p.w,6);var x=0;
+    while(x<p.w){var dw=3+R()*12,ln=8+Math.pow(R(),2.2)*(p.h-16);c.fillRect(x,0,dw,ln);c.beginPath();c.arc(x+dw/2,ln,dw*.7,0,7);c.fill();x+=dw+R()*42}
+  }
+  function art(cv){
+    var p=prep(cv),c=p.c,s=+cv.dataset.art,R=rng(s*97+11);
+    var g=c.createLinearGradient(0,0,p.w,p.h);var pal=[[DEEP,'#0B0710'],[NEON,'#160E1E'],['#2A1240','#0B0710'],[SIN,'#160E1E']][s%4];
+    g.addColorStop(0,pal[0]);g.addColorStop(.75,pal[1]);c.fillStyle=g;c.fillRect(0,0,p.w,p.h);
+    c.globalAlpha=.75;blob(c,R,p.w*(.3+R()*.4),p.h*(.25+R()*.25),Math.min(p.w,p.h)*.16,[NEON,SIN,GLOW][s%3],18);
+    c.globalAlpha=1;var sh=c.createLinearGradient(0,p.h*.45,0,p.h);sh.addColorStop(0,'rgba(11,7,16,0)');sh.addColorStop(1,'rgba(11,7,16,.92)');c.fillStyle=sh;c.fillRect(0,0,p.w,p.h);
+  }
+  function paint(){
+    document.querySelectorAll('canvas[data-splat]').forEach(splat);
+    document.querySelectorAll('canvas[data-drip]').forEach(drip);
+    document.querySelectorAll('canvas[data-art]').forEach(art);
+  }
+  paint();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(paint,150)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(paint);
+
+  // Div animation: 27 clips (one per keyframe pair) chained into one loop with two buffered videos.
+  // Off pages.dev (e.g. inside a sandboxed preview) the media is blocked and the static card stays.
+  (function(){
+    var B='https://d8j0ntlcm91z4.cloudfront.net/user_38uZWJgf13vAnvA3Cfk7DsjnPUG/hf_20261010_';
+    var clips=['035609_041ee76e-2fb4-4077-8501-c54f3623a960','035609_383851d6-a9ed-49a0-9c72-4051d262539c','035609_5e5adcab-13e0-4928-b401-265edb51d735','035609_65ca7a22-c39f-441f-b599-915fcb336e20','035609_f931f604-6250-483a-a5ad-d58c9c24d84e','035609_ef6d435f-641f-4969-ad46-baf95e11ede3','035609_19a21d54-9f80-47ab-9619-785d0fcab208','035609_2f28d807-8df0-4e1c-be65-e504def539df','035609_ea5bee2c-3173-43a2-bc1d-b23f6f9a069f','035652_b359390d-0ab9-4e2b-9ec2-596c43783dd9','035609_b6ae282d-99d6-41fa-b9de-eca7d4ae46ca','035609_62a9d120-e533-4c5b-98b3-cb880ffc1311','035653_9479f81e-7e8c-44d8-956a-b36abbc9de0a','035652_455aad69-c2f4-4d77-8999-da6e513d55de','035653_a8918562-a313-4b63-851c-a8e651e5b157','035653_153ad23c-33c8-4b9c-aca8-afc160d8dc5a','035652_1391ee0b-6204-4823-a1c4-eed5b2a15a9e','035652_7665c456-3404-4cab-a858-a58bbec42d11','035652_f3322315-b2b7-410d-8399-061cea8c17d9','035652_09a8e1a5-ab87-4c18-9449-7fe3458a25e1','035653_7b46c23b-6fd5-4105-a143-a62164ccd0c1','035652_c57c9220-b334-4f0b-87aa-62fa2c86dd9e','035652_7263ead7-8279-4c82-8de5-bbffbba826a1','035710_74817e38-4195-4353-8ad7-7771624e3a8d','035710_cdc937ef-e04a-4830-b77e-a0c4b42a522f','035710_c6469f3b-4d17-464d-b964-e251cb8c685e','035710_409bc9ee-73fd-42f7-b661-ff815af0a802'].map(function(c){return B+c+'.mp4'});
+    var card=document.querySelector('.div-card'),poster=document.getElementById('div-poster');
+    var v=[document.getElementById('va'),document.getElementById('vb')],cur=0,idx=0;
+    var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    poster.addEventListener('load',function(){card.classList.add('has-anim');if(!still)start()});
+    var RATE=1.6;
+    function load(el,i){el.src=clips[i%clips.length];el.load();el.playbackRate=RATE;el.defaultPlaybackRate=RATE}
+    function start(){
+      load(v[0],0);load(v[1],1);
+      v[0].addEventListener('canplay',function first(){v[0].removeEventListener('canplay',first);v[0].classList.add('on');v[0].play().catch(function(){})});
+      v.forEach(function(el,k){
+        el.addEventListener('ended',function(){
+          var nx=v[1-k];nx.classList.add('on');nx.play().catch(function(){});el.classList.remove('on');
+          idx++;load(el,idx+1);
+        });
+        el.addEventListener('error',function(){v.forEach(function(x){x.classList.remove('on')})});
+      });
+    }
+  })();
+
+  // mobile menu
+  var mb=document.getElementById('menu-btn'),links=document.getElementById('links');
+  mb.addEventListener('click',function(){var o=links.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');mb.textContent=o?'Close':'Menu'});
+  links.addEventListener('click',function(e){if(e.target.closest('a')&&links.classList.contains('open')){links.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.textContent='Menu'}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.textContent='Menu';mb.focus()}});
+
+  // portfolio filter
+  var chips=document.querySelectorAll('.chip');
+  chips.forEach(function(ch){ch.addEventListener('click',function(){
+    chips.forEach(function(o){o.setAttribute('aria-pressed',o===ch?'true':'false')});
+    var f=ch.dataset.f;document.querySelectorAll('.work').forEach(function(w){w.hidden=!(f==='all'||w.dataset.cat===f||w.dataset.cat==='all')});
+    paint();
+  })});
+
+  // inquiry builder
+  var form=document.getElementById('inq'),out=document.getElementById('out'),txt=document.getElementById('out-text');
+  function setErr(id,msg){document.getElementById('e-'+id).textContent=msg;var el=document.getElementById('f-'+id);if(msg)el.setAttribute('aria-invalid','true');else el.removeAttribute('aria-invalid')}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();var v=function(n){return form.elements[n].value.trim()};var bad=null;
+    [['name','Add your name.'],['brand','Add your brand or company.'],['msg','Tell me a little about the project.']].forEach(function(r){var m=v(r[0])?'':r[1];setErr(r[0],m);if(m&&!bad)bad=r[0]});
+    var em=v('email'),emOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);setErr('email',emOk?'':'Add an email like you@brand.com.');if(!emOk&&!bad)bad='email';
+    if(bad){out.hidden=true;document.getElementById('f-'+bad).focus();return}
+    txt.textContent='Hi Bella! Collab inquiry from '+v('brand')+'.\n\nName: '+v('name')+'\nEmail: '+em+'\nService: '+v('service')+'\nBudget: '+v('budget')+'\nTimeline: '+(v('when')||'Flexible')+'\n\n'+v('msg');
+    out.hidden=false;document.getElementById('copy-msg').textContent='';out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  document.getElementById('copy').addEventListener('click',function(){
+    var m=document.getElementById('copy-msg');
+    function sel(){var r=document.createRange();r.selectNodeContents(txt);var s=window.getSelection();s.removeAllRanges();s.addRange(r);m.textContent='Selected. Press Ctrl+C or Cmd+C to copy.'}
+    try{navigator.clipboard.writeText(txt.textContent).then(function(){m.textContent='Copied. Paste it into a DM.'},sel)}catch(err){sel()}
+  });
+})();
+</script>
+</body>
+</html>
