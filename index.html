@@ -82,8 +82,8 @@ p{margin:0}
 .div-card>*:not(canvas){position:relative;z-index:1}
 .div-card .mark{width:min(200px,60%);height:min(200px,40vw);align-self:center;filter:drop-shadow(0 0 20px rgba(176,38,255,.8))}
 .div-card h2{font-size:30px;text-transform:uppercase}
-.div-anim{position:absolute;inset:0;z-index:2;background:var(--void);display:none}
-.div-card.has-anim .div-anim{display:block}
+.div-card>.div-anim{position:absolute;inset:0;z-index:2;background:var(--void);display:none}
+.div-card.has-anim>.div-anim{display:block}
 .div-card.has-anim{min-height:0;aspect-ratio:3/4;padding:0}
 .div-card.has-anim>*:not(.div-anim){display:none}
 .div-anim video,.div-anim img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:100%}
